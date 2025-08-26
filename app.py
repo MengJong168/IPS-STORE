@@ -53,7 +53,7 @@ def save_transactions(transactions):
 # Add a single transaction to data store
 def add_transaction_to_store(transaction_data, status):
     try:
-        response = requests.post(f'{DATA_STORE_URL}/transactions?store=mengtopup/add', 
+        response = requests.post(f'{DATA_STORE_URL}/transactions?store=ipsstore/add', 
                                json={
                                    'status': status,
                                    'transaction': transaction_data
@@ -65,7 +65,7 @@ def add_transaction_to_store(transaction_data, status):
 # Load packages from data store API
 def load_packages():
     try:
-        response = requests.get(f'{DATA_STORE_URL}/packages?store=mengtopup', timeout=5)
+        response = requests.get(f'{DATA_STORE_URL}/packages?store=ipsstore', timeout=5)
         response.raise_for_status()
         return response.json()
     except requests.RequestException:
@@ -528,4 +528,4 @@ def send_to_telegram(transaction):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+    app.run()
