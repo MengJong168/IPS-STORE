@@ -266,7 +266,7 @@ def check_payment():
         else:
             return jsonify({
                 'status': 'ERROR',
-                'message': 'Failed to check payment status'
+                # 'message': 'Failed to check payment status'
             })
             
     except Exception as e:
@@ -529,4 +529,5 @@ def send_to_telegram(transaction):
 
 if __name__ == '__main__':
     app.run()
+
 
