@@ -23,7 +23,7 @@
   <a href="https://t.me/ips_store" target="_blank" rel="noopener noreferrer" class="support-button">
   <img src="/static/images/support.jpg" alt="Support">
 </a>
-  <header onclick="location.reload()">
+  <header onclick="goToHomepage()">
     <div class="header-content">
       <img src="/static/images/logo.jpg" alt="IPS Store Logo" class="header-logo" />
       <h1 style="font-family: 'Cabin Condensed', sans-serif; font-size: 40px; white-space: nowrap;">
@@ -1020,6 +1020,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       selectedPrice = 0;
       selectedName = "";
       document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+      updateGameURL('mobile-legend'); // Add this line
     }
 
     function showFFTopup() {
@@ -1032,6 +1033,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       selectedPrice = 0;
       selectedName = "";
       document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+      updateGameURL('free-fire'); // Add this line
     }
 
     // Add this function
@@ -2244,6 +2246,91 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('mcggIdInput').addEventListener('input', saveRememberedPrefs);
   document.getElementById('mcggZoneInput').addEventListener('input', saveRememberedPrefs);
 });
+  // Add this function to handle URL changes
+function updateGameURL(gameSlug) {
+    const newURL = `${window.location.origin}/${gameSlug}`;
+    window.history.pushState({game: gameSlug}, '', newURL);
+}
+// Add this function to handle back/forward browser navigation
+window.addEventListener('popstate', function(event) {
+    // Parse the URL to determine which section to show
+    const path = window.location.pathname;
+    
+    if (path.includes('mobile-legend')) {
+        showMLTopup();
+    } else if (path.includes('free-fire')) {
+        showFFTopup();
+    } else if (path.includes('pubg-mobile')) {
+        showPUBGTopup();
+    } else if (path.includes('honor-of-kings')) {
+        showHOKTopup();
+    } else if (path.includes('blood-strike')) {
+        showBloodStrikeTopup();
+    } else if (path.includes('magic-chess-go-go')) {
+        showMCGGTopup();
+    } else {
+        // Default to homepage
+        document.getElementById('homepage').style.display = 'block';
+        document.getElementById('mlTopupSection').style.display = 'none';
+        document.getElementById('ffTopupSection').style.display = 'none';
+        document.getElementById('pubgTopupSection').style.display = 'none';
+        document.getElementById('hokTopupSection').style.display = 'none';
+        document.getElementById('bloodstrikeTopupSection').style.display = 'none';
+        document.getElementById('mcggTopupSection').style.display = 'none';
+        document.getElementById('buyNowBtn').style.display = 'none';
+        document.getElementById('mainFooter').style.display = 'block';
+    }
+});
+
+// Add this to handle direct URL access on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const path = window.location.pathname;
+    
+    if (path.includes('mobile-legend')) {
+        showMLTopup();
+    } else if (path.includes('free-fire')) {
+        showFFTopup();
+    } else if (path.includes('pubg-mobile')) {
+        showPUBGTopup();
+    } else if (path.includes('honor-of-kings')) {
+        showHOKTopup();
+    } else if (path.includes('blood-strike')) {
+        showBloodStrikeTopup();
+    } else if (path.includes('magic-chess-go-go')) {
+        showMCGGTopup();
+    }
+    // If no specific game in URL, homepage will remain visible
+});
+   function goToHomepage() {
+        // Update URL
+        window.history.pushState({page: 'home'}, '', '/');
+        
+        // Show homepage and hide all game sections
+        document.getElementById('homepage').style.display = 'block';
+        document.getElementById('mainFooter').style.display = 'block';
+        
+        // Hide all game sections
+        const gameSections = [
+            'mlTopupSection', 'ffTopupSection', 'pubgTopupSection', 
+            'hokTopupSection', 'bloodstrikeTopupSection', 'mcggTopupSection'
+        ];
+        
+        gameSections.forEach(section => {
+            document.getElementById(section).style.display = 'none';
+        });
+        
+        // Hide buy button
+        document.getElementById('buyNowBtn').style.display = 'none';
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+        
+        // Add transition effect
+        document.getElementById('homepage').classList.add('page-transition');
+        setTimeout(() => {
+            document.getElementById('homepage').classList.remove('page-transition');
+        }, 300);
+    }
 </script>
 </body>
 </html>
