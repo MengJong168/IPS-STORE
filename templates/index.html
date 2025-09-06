@@ -1482,10 +1482,10 @@ function startAutoPaymentCheck() {
   // Initial immediate check
   checkBakongPayment();
   
-  // Set up recurring checks every 5 seconds
+  // Set up recurring checks every 8 seconds
   paymentCheckInterval = setInterval(() => {
     checkBakongPayment();
-  }, 5);
+  }, 8000);
 }
 
 function stopAutoPaymentCheck() {
