@@ -114,6 +114,31 @@ os.makedirs('static/images', exist_ok=True)
 def index():
     return render_template('index.html')
 
+# Add these new routes for each game
+@app.route('/mobile-legend')
+def mobile_legend():
+    return render_template('index.html')
+
+@app.route('/free-fire')
+def free_fire():
+    return render_template('index.html')
+
+@app.route('/pubg-mobile')
+def pubg_mobile():
+    return render_template('index.html')
+
+@app.route('/honor-of-kings')
+def honor_of_kings():
+    return render_template('index.html')
+
+@app.route('/blood-strike')
+def blood_strike():
+    return render_template('index.html')
+
+@app.route('/magic-chess-go-go')
+def magic_chess_go_go():
+    return render_template('index.html')
+
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory('static', filename)
@@ -529,5 +554,6 @@ def send_to_telegram(transaction):
 
 if __name__ == '__main__':
     app.run()
+
 
 
